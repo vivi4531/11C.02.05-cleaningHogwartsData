@@ -2,7 +2,7 @@
 
 window.addEventListener("DOMContentLoaded", start);
 
-//Animal array
+//Student array
 const allStudents = [];
 
 function start() {
@@ -24,13 +24,13 @@ function loadJSON() {
 
 function prepareObjects(jsonData) {
   jsonData.forEach((jsonObject) => {
-    // TODO: Create new object with cleaned data - and store that in the allAnimals array
+    // TODO: Create new object with cleaned data - and store that in the allStudents array
     //Creating empty template for objects
     const studentTemplate = {
       firstName: "-unknown-",
       lastName: "-unknown-",
       middleName: "-unknown-",
-      nickName: "null",
+      nickName: "none",
       photo: "",
       house: "",
     };
@@ -43,8 +43,8 @@ function prepareObjects(jsonData) {
     const lastSpace = fullName.lastIndexOf(" ");
     const firstQ = fullName.indexOf('"');
     const lastQ = fullName.lastIndexOf('"');
-    //Creating animal and making animal into an object
 
+    //Creating student and making student into an object
     const student = Object.create(studentTemplate);
     let HyphenOrSpace = false;
     let result = "";
@@ -62,7 +62,8 @@ function prepareObjects(jsonData) {
       }
     }
     fullName = result;
-    //defining animal name using split and calling the index we need
+
+    //Defining student name using split and calling the index we need
     student.firstName = splitFullName[0].substring(0, 1).toUpperCase() + splitFullName[0].substring(1);
     student.lastName = fullName.substring(lastSpace).trim();
     student.middleName = fullName.substring(firstSpace + 1, lastSpace).trim();
@@ -72,17 +73,15 @@ function prepareObjects(jsonData) {
       student.nickName = student.middleName;
       student.middleName = "";
     } else if (student.middleName === "") {
-      student.middleName = "null";
+      student.middleName = "none";
     } else {
-      student.nickName = "null";
+      student.nickName = "none";
     }
     // student.photo = jsonObject.age;
 
     student.house = house.substring(0, 1).toUpperCase() + house.substring(1);
 
-    //Not able to remove first name
-
-    //Combining array and adding (pushing) animal into it
+    //Combining array and adding (pushing) student into it
     allStudents.push(student);
   });
 
